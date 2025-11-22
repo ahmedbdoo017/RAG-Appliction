@@ -5,3 +5,13 @@ python-dotenv==1.0.1
 pydantic==2.10.6
 pydantic-settings==2.8.1
 aiofiles==23.2.1
+langchain==0.1.20
+PyMuPDF==1.24.3
+motor>=3.3,<4
+openai==2.8.1
+cohere==5.20.0
+Python==3.10.19
+qdrant-client==0.14.0
+
+
+

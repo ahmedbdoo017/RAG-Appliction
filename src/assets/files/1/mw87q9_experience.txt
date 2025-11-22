@@ -1,0 +1,49 @@
+
+
+Samsung – Internship (Aug 2024 – Oct 2024)
+
+Benha ACM Community – Trainee (Mar 2021 – Aug 2022)
+
+✅ Example Filling:
+
+Experience 1
+
+Position name: Machine Learning Engineer Intern
+
+Employer: Samsung
+
+Salary: (Unpaid / Stipend إذا كان التدريب بدون مرتب أو مبلغ بسيط)
+
+Currency: EGP (أو None لو بدون مرتب)
+
+Select frequency: Monthly
+
+Start Date: Aug 2024 – Oct 2024
+
+Location: Cairo, Egypt
+
+Description:
+"Built and deployed ML models for computer vision and NLP applications, optimized data pipelines (reduced processing time by ~20%), and contributed to GANs and text-processing system improvements."
+
+I currently work here: ❌
+
+Experience 2
+
+Position name: Problem Solving Trainee
+
+Employer: Benha ACM Community
+
+Salary: Volunteer / Unpaid
+
+Currency: None
+
+Select frequency: N/A
+
+Start Date: Mar 2021 – Aug 2022
+
+Location: Benha, Egypt
+
+Description:
+"Solved 800+ algorithmic problems in C++/Python, focused on data structures and complexity, improved efficiency by 30%, and ranked in top 10% of local contests through weekly training."
+
+I currently work here: ❌

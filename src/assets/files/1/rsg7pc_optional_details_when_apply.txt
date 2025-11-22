@@ -1,0 +1,42 @@
+🔹 Headline (جملة تعريفية قصيرة)
+
+Machine Learning Engineer | AI Enthusiast | Skilled in Computer Vision, NLP, and Data Analytics
+
+🔹 Summary (ملخص عنك للـ CV أو LinkedIn)
+
+Motivated Machine Learning Engineer with a strong background in Artificial Intelligence and Computer Science, graduating with distinction (3.74 GPA) from Benha University. Experienced in building and deploying ML models for computer vision and NLP applications, with hands-on internship experience at Samsung. Skilled in Python, C++, TensorFlow, and Scikit-learn, with a proven track record of solving 800+ algorithmic problems and contributing to impactful AI projects such as a Paralegal AI Assistant and reinforcement learning agents. Passionate about leveraging AI to deliver innovative and efficient solutions, with strong problem-solving, teamwork, and communication skills.
+
+🔹 Cover Letter (خطاب التقديم)
+
+(تقدر تعدل اسم الشركة والوظيفة اللي بتقدم لها)
+
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the Machine Learning Engineer position at [Company Name]. With a Bachelor’s degree in Computer and Artificial Intelligence (graduating with an Excellent GPA of 3.74) and hands-on experience in developing and deploying AI solutions, I am confident in my ability to contribute effectively to your team.
+
+During my internship at Samsung, I worked on building ML models for computer vision and NLP, optimizing data analysis pipelines, and enhancing model performance. I have also developed impactful projects, including a Paralegal AI Assistant featured in the media, a reinforcement learning firefighter agent, and multiple computer vision applications. These experiences have strengthened my technical expertise in Python, TensorFlow, Scikit-learn, and C++, as well as my ability to work in collaborative environments.
+
+Beyond my technical skills, I bring strong problem-solving abilities, time management, and adaptability, supported by my background in competitive programming where I solved over 800 algorithmic problems and ranked in the top 10% of local contests.
+
+I am passionate about applying AI to create practical, real-world solutions and I am excited about the opportunity to contribute to [Company Name]’s innovative projects. I would welcome the chance to discuss how my skills and experiences align with your team’s goals.
+
+Thank you for considering my application. I look forward to the opportunity to contribute to your success.
+
+Sincerely,
+Ahmed Abdelaziz
+
+
+
+
+
+
+
+Hello, my name is Ahmed Abdelaziz. I’m a senior student at the Faculty of Computer and Artificial Intelligence, Benha University, specializing in Artificial Intelligence, with an excellent academic record.
+
+I recently completed an internship at Samsung as a Machine Learning Engineer, where I worked on computer vision and NLP projects, optimized data pipelines, and contributed to improving GANs and text processing systems.
+
+I also have strong problem-solving skills, with more than 800 algorithmic problems solved in C++ and Python, and I ranked in the top 10% of local contests.
+
+In addition, I worked on projects such as a Paralegal AI Assistant using advanced NLP, a reinforcement learning firefighter agent, and computer vision applications like facial key points detection.
+
+I’m passionate about applying AI in real-world solutions, learning continuously, and working in collaborative environments. I believe my mix of technical skills, problem-solving mindset, and enthusiasm for innovation make me a strong fit for this role."
