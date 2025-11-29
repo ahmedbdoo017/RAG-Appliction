@@ -26,7 +26,8 @@ class OpenAIProvider(LLMInterface):
             api_key = self.api_key,
             base_url = self.api_url if self.api_url and len(self.api_url) else None
         )
-
+        
+        self.enums =OpenAIEnums
         self.logger = logging.getLogger(__name__)
 
     
@@ -70,7 +71,7 @@ class OpenAIProvider(LLMInterface):
             self.logger.error("error while genaration text with openai")
             return None
         
-        return response.choices[0].message["content"]
+        return response.choices[0].message.content
 
 
     def embed_text(self, text:str, document_type:str=None):
@@ -100,20 +101,3 @@ class OpenAIProvider(LLMInterface):
             "role" : role,
             "content" : self.process_text(prompt) 
         }
-
-
-        
-
-    
-
-        
-
-        
-
-
-
-
-    
-        
-
-        

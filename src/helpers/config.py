@@ -45,7 +45,8 @@ class Settings(BaseSettings):
     VECTOR_DB_DISTANCE_METHOD: str = None
     VECTOR_DB_BACKEND: str
 
-
+    PRIMARY_LANG: str = "en"
+    DEFAULT_LANG: str = "en"
 
 
     # Define model configuration and specify the .env file path

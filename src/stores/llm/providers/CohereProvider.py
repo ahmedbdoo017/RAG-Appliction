@@ -24,6 +24,8 @@ class CohereProvider(LLMInterface):
 
         self.client =cohere.Client(api_key =self.api_key)
 
+        self.enums = CohereEnums
+
         self.logger = logging.getLogger(__name__)
 
     def set_generation_model(self, model_id: str):
@@ -65,33 +67,40 @@ class CohereProvider(LLMInterface):
         return response.text
     
 
-    def embed_text(self, text:str, document_type:str=None):
-
+    def embed_text(self, text: str, document_type: str = None):
         if not self.client:
             self.logger.error("Cohere client wasn't set")
             return None
 
         if not self.embedding_model_id:
-            self.logger.error("Embbeding model for cohere in wasn't set")
+            self.logger.error("Embedding model for cohere wasn't set")
             return None
-        
-        input_type =CohereEnums.DOCUMENT.value
 
+        input_type = CohereEnums.DOCUMENT.value
         if document_type == DocumentTypeEnum.QUERY.value:
             input_type = CohereEnums.QUERY.value
-        
+
         response = self.client.embed(
             model=self.embedding_model_id,
-            texts = [self.process_text(text)],
-            input_type =input_type,
-            embedding_types =['float']
+            texts=[self.process_text(text)],
+            input_type=input_type,
+            embedding_types=['float']
         )
 
-        if not response or not response.embeddings or not response.embeddings.float:
-            self.logger.error("error while embedding with cohere")
+        if (not response
+            or not hasattr(response, "embeddings")
+            or not hasattr(response.embeddings, "float")
+            or not response.embeddings.float
+        ):
+            self.logger.error("Error while embedding with Cohere: invalid float embedding")
+            return None
+
+        embedding_list = response.embeddings.float
+        if isinstance(embedding_list[0], list):
+            return embedding_list[0]
+        return embedding_list
+
         
-        return response.embeddings.float[0]
-    
 
     def construct_prompt(self, prompt:str, role:str):
 

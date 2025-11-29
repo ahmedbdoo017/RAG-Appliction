@@ -1,8 +1,11 @@
 from qdrant_client import models, QdrantClient
 from ..VectorDBInterface import VectorDBInterface
 from ..VectorDBEnums import DistanceMethodEnums
+from models.db_schemes import RetrivedDocument
 import logging
 from typing import List
+import uuid
+
 
 class QdrantDBProvider(VectorDBInterface):
 
@@ -35,7 +38,7 @@ class QdrantDBProvider(VectorDBInterface):
         return self.client.get_collection(collection_name=collection_name)
     
     async def delete_collection(self, collection_name: str):
-        if self.is_collection_existed(collection_name):
+        if await self.is_collection_existed(collection_name):
             self.logger.info(f"Deleting collection: {collection_name}")
             return self.client.delete_collection(collection_name=collection_name)
         
@@ -43,9 +46,9 @@ class QdrantDBProvider(VectorDBInterface):
                                 embedding_size: int,
                                 do_reset: bool = False):
         if do_reset:
-            _ = self.delete_collection(collection_name=collection_name)
+            _ = await self.delete_collection(collection_name=collection_name)
         
-        if not self.is_collection_existed(collection_name):
+        if not await self.is_collection_existed(collection_name):
             self.logger.info(f"Creating new Qdrant collection: {collection_name}")
             
             _ = self.client.create_collection(
@@ -64,7 +67,7 @@ class QdrantDBProvider(VectorDBInterface):
                          metadata: dict = None, 
                          record_id: str = None):
         
-        if not self.is_collection_existed(collection_name):
+        if not await self.is_collection_existed(collection_name):
             self.logger.error(f"Can not insert new record to non-existed collection: {collection_name}")
             return False
         
@@ -73,7 +76,7 @@ class QdrantDBProvider(VectorDBInterface):
                 collection_name=collection_name,
                 records=[
                     models.Record(
-                        id= [record_id],
+                        id= record_id,
                         vector=vector,
                         payload={
                             "text": text, "metadata": metadata
@@ -88,14 +91,14 @@ class QdrantDBProvider(VectorDBInterface):
         return True
     
     async def insert_many(self, collection_name: str, texts: list, 
-                          vectors: list, metadata: list = None, 
-                          record_ids: list = None, batch_size: int = 50):
-        
+                      vectors: list, metadata: list = None, 
+                      record_ids: list = None, batch_size: int = 50):
+
         if metadata is None:
             metadata = [None] * len(texts)
 
         if record_ids is None:
-            record_ids = list(range(0, len(texts)))
+            record_ids = [str(uuid.uuid4()) for _ in range(len(texts))]
 
         for i in range(0, len(texts), batch_size):
             batch_end = i + batch_size
@@ -105,37 +108,46 @@ class QdrantDBProvider(VectorDBInterface):
             batch_metadata = metadata[i:batch_end]
             batch_record_ids = record_ids[i:batch_end]
 
-            batch_records = [
-                models.Record(
-                    id = [batch_record_ids[x]],
-                    vector=batch_vectors[x],
-                    payload={
-                        "text": batch_texts[x], "metadata": batch_metadata[x]
-                    }
-                )
-
-                for x in range(len(batch_texts))
-            ]
-
             try:
-                _ = self.client.upload_records(
+                _ = self.client.upsert(
                     collection_name=collection_name,
-                    records=batch_records,
+                    points=models.Batch(
+                        ids=batch_record_ids,
+                        vectors=batch_vectors,
+                        payloads=[
+                            {"text": batch_texts[x], "metadata": batch_metadata[x]}
+                            for x in range(len(batch_texts))
+                        ]
+                    )
                 )
+
             except Exception as e:
                 self.logger.error(f"Error while inserting batch: {e}")
                 return False
 
         return True
+
         
     async def search_by_vector(self, collection_name: str, vector: list, limit: int = 5):
+        try:
+            results = self.client.query_points(
+                collection_name=collection_name,
+                query=vector,
+                limit=limit
+            )
+            points_list = results.points
 
-        results = self.client.search(
-            collection_name=collection_name,
-            query_vector=vector,
-            limit=limit
-        )
-        
-        return results
+            return [
+                RetrivedDocument(
+                    score=item.score,
+                    text=item.payload['text']
+                )
+                for item in points_list
+            ]
+                    
+        except Exception as e:
+            self.logger.error(f"Error in search_by_vector: {e}")
+            return None
+
 
         
